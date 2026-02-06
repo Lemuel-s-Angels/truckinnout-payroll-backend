@@ -4,30 +4,10 @@ A backend API for the Truck In-N-Out application, built with Django and Django R
 
 ---
 
-## Table of Contents
-
-- [Tech Stack](#tech-stack)
-- [Prerequisites](#prerequisites)
-- [Getting Started](#getting-started)
-  - [Clone the Repo](#clone-the-repo)
-  - [Environment Variables](#environment-variables)
-  - [Virtual Environment & Dependencies](#virtual-environment--dependencies)
-  - [Database Setup & Migrations](#database-setup--migrations)
-- [Running Locally](#running-locally)
-- [Running with Docker](#running-with-docker)
-- [API Documentation](#api-documentation)
-- [Running Tests](#running-tests)
-- [Linting & Formatting](#linting--formatting)
-- [Deploying](#deploying)
-- [Contributing](#contributing)
-- [License](#license)
-
----
-
 ## Tech Stack
 
 - **Language & Framework**: Python 3.10+, Django 4.x, Django REST Framework
-- **Database**: PostgreSQL (default), SQLite for development
+- **Database**: PostgreSQL (default)
 - **Authentication**: JWT (using djangorestframework-simplejwt)
 - **Email**: Django’s built-in email backends (SMTP, console)
 - **Containerization**: Docker & Docker Compose
@@ -39,8 +19,7 @@ A backend API for the Truck In-N-Out application, built with Django and Django R
 ## Prerequisites
 
 - **Python** ≥ 3.10
-- **pip**
-- **virtualenv** or **venv**
+- uv
 - **Docker Desktop** (https://www.docker.com/)
 - **Git**
 
@@ -78,20 +57,31 @@ Create a `.env` file first then add the environment variables:
 
 ### Virtual Environment & Dependencies
 
-```bash
-python -m venv venv
-source venv/bin/activate  # on macOS/Linux
-# on Windows: venv\Scripts\activate
+#### Install uv first
 
-pip install --upgrade pip
-pip install -r requirements.txt
+Unix Based:
+
+```bash
+curl -LsSf https://astral.sh/uv/install.sh
+```
+
+Windows:
+
+```powershell
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+```
+
+Run the following after installing and adding uv to path:
+
+```bash
+uv sync
 ```
 
 ---
 
 ## Running Docker
 
-Ensure Docker Desktop (or Colima) is running, then:
+Ensure Docker Desktop is running, then:
 
 ```bash
 docker-compose up --build
