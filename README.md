@@ -38,22 +38,22 @@ cd truck-in-n-out-backend
 
 Create a `.env` file first then add the environment variables:
 
-| Variable                   | Description                                                 |
-| -------------------------- | ----------------------------------------------------------- |
-| `SECRET_KEY`               | Secret key used by Django for cryptographic signing         |
-| `DEBUG`                    | Enables or disables Django's debug mode (`True` or `False`) |
-| `DATABASE_URL`             | URL for connecting to the PostgreSQL database               |
-| `AWS_ACCESS_KEY`           | AWS access key ID for authenticating AWS services           |
-| `AWS_SECRET_ACCESS_KEY`    | AWS secret access key for authenticating AWS services       |
-| `AWS_STORAGE_BUCKET_NAME`  | Name of the S3 bucket used for storing static/media files   |
-| `AWS_S3_SIGNATURE_VERSION` | S3 signature version used for requests (e.g., `s3v4`)       |
-| `AWS_QUERYSTRING_EXPIRE`   | Duration (in seconds) before S3 URL query strings expire    |
-| `AWS_S3_REGION_NAME`       | AWS region where the S3 bucket is located                   |
-| `DEFAULT_FILE_STORAGE`     | Django setting to specify default file storage backend      |
-| `AWS_S3_CUSTOM_DOMAIN`     | Custom domain for accessing S3-hosted files                 |
-| `RESEND_API_KEY`           | API key for sending emails using Resend                     |
-| `RESEND_HOST`              | Host endpoint for the Resend API                            |
-| `FRONTEND_DOMAIN`          | Domain of the frontend application                          |
+```bash
+SECRET_KEY=Secret key used by Django for cryptographic signing
+DEBUG=Enables or disables Django's debug mode (`True` or
+DATABASE_URL=URL for connecting to the PostgreSQL database
+AWS_ACCESS_KEY=AWS access key ID for authenticating AWS services
+AWS_SECRET_ACCESS_KEY=AWS secret access key for authenticating AWS servic
+AWS_STORAGE_BUCKET_NAME=Name of the S3 bucket used for storing static/media
+AWS_S3_SIGNATURE_VERSION=S3 signature version used for requests (e.g., `s3v4
+AWS_QUERYSTRING_EXPIRE=Duration (in seconds) before S3 URL query strings e
+AWS_S3_REGION_NAME=AWS region where the S3 bucket is located
+DEFAULT_FILE_STORAGE=Django setting to specify default file storage back
+AWS_S3_CUSTOM_DOMAIN=Custom domain for accessing S3-hosted files
+RESEND_API_KEY=API key for sending emails using Resend
+RESEND_HOST=Host endpoint for the Resend API
+FRONTEND_DOMAIN=Domain of the frontend application
+```
 
 ### Virtual Environment & Dependencies
 
