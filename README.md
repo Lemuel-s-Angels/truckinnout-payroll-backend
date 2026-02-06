@@ -42,6 +42,15 @@ Create a `.env` file first then add the environment variables:
 SECRET_KEY=Secret key used by Django for cryptographic signing
 DEBUG=Enables or disables Django's debug mode (`True` or
 DATABASE_URL=URL for connecting to the PostgreSQL database
+
+# values are local, so changed accordingly in production
+DB_NAME=truckinnout_db
+DB_USER=postgres
+DB_PASSWORD=postgres
+DB_HOST=localhost
+DB_PORT=5432
+APP_PORT=8000
+
 AWS_ACCESS_KEY=AWS access key ID for authenticating AWS services
 AWS_SECRET_ACCESS_KEY=AWS secret access key for authenticating AWS servic
 AWS_STORAGE_BUCKET_NAME=Name of the S3 bucket used for storing static/media
