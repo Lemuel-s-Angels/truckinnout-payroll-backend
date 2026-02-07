@@ -5,8 +5,7 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: truckinnout-dev
-    command: sh -c "python manage.py makemigrations --no-input &&
-      python manage.py migrate --no-input --settings=truckinnout_backend.settings && python manage.py runserver 0.0.0.0:8000 && wait"
+    command: sh -c "python manage.py makemigrations --no-input && python manage.py migrate --no-input && python manage.py runserver 0.0.0.0:8000"
     environment:
       DJANGO_SETTINGS_MODULE: truckinnout_backend.settings
       AWS_QUERYSTRING_EXPIRE: ${AWS_QUERYSTRING_EXPIRE}
@@ -18,35 +17,16 @@ services:
       RESEND_API_KEY: ${RESEND_API_KEY}
       RESEND_HOST: ${RESEND_HOST}
       DEFAULT_FILE_STORAGE: ${DEFAULT_FILE_STORAGE}
-      DB_NAME: ${DB_NAME}
-      DB_USER: ${DB_USER}
-      DB_PASSWORD: ${DB_PASSWORD}
-      DB_HOST: truckinnout_db
-      DB_PORT: ${DB_PORT}
+      DB_URL: ${DB_URL}
       STATIC_URL: static/
-      STATIC_ROOT: os.path.join(BASE_DIR, 'staticfiles')
+      STATIC_ROOT: /truckinnout-backend/staticfiles
       MEDIA_URL: /media/
-      MEDIA_ROOT: os.path.join(BASE_DIR, 'static/images')
+      MEDIA_ROOT: /truckinnout-backend/static/images
       SECRET_KEY: ${SECRET_KEY}
       DEBUG: ${DEBUG}
-    depends_on:
-      - truckinnout_db
     ports:
-      - "${APP_PORT}:${APP_PORT}"
+      - "${APP_PORT}:8000"
     volumes:
       - .:/truckinnout-backend
+      - /truckinnout-backend/.venv
     working_dir: /truckinnout-backend
-  truckinnout_db:
-    image: postgres:latest
-    volumes:
-      - truckinnout-backend:/var/lib/postgresql/data
-    environment:
-      POSTGRES_DB: ${DB_NAME}
-      POSTGRES_USER: ${DB_USER}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-    container_name: truckinnout-db
-    ports:
-      - "5432:5432"
-
-volumes:
-  truckinnout-backend:
