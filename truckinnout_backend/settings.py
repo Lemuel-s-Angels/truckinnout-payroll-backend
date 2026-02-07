@@ -52,7 +52,6 @@ INSTALLED_APPS = [
     "drf_yasg",
     "django_filters",
     "corsheaders",
-    "easyaudit",
     # Rest framework
     "rest_framework",
     "rest_framework_simplejwt.token_blacklist",
