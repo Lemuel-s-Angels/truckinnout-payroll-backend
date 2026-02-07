@@ -12,13 +12,6 @@ from storages.backends.s3boto3 import S3Boto3Storage
 
 from shared.validators import validate_image
 
-ROLE_CHOICES = (
-    ("SUPER_ADMIN", "super_admin"),
-    ("ADMIN", "admin"),
-    ("EMPLOYEE", "employee"),
-    ("OPERATING_PERSONNEL", "operating_personnel"),
-)
-
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
@@ -35,7 +28,7 @@ class CustomUserManager(BaseUserManager):
         user = self.create_user(email, password)
         user.is_staff = True
         user.is_superuser = True
-        user.role = "SUPER_ADMIN"
+        user.role = CustomUser.Role.SUPER_ADMIN
         user.first_name = "SUPER"
         user.last_name = "ADMIN"
         user.save(using=self._db)
@@ -43,6 +36,12 @@ class CustomUserManager(BaseUserManager):
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
+    class Role(models.TextChoices):
+        SUPER_ADMIN = "super_admin", "Super Admin"
+        ADMIN = "admin", "Admin"
+        EMPLOYEE = "employee", "Employee"
+        OPERATING_PERSONNEL = "operating_personnel", "Operating Personnel"
+
     id = models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True)
     email = models.EmailField(max_length=100, unique=True, validators=[validate_email])
     first_name = models.CharField(max_length=100, blank=False, null=False)
@@ -50,7 +49,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     role = models.CharField(
-        max_length=50, choices=ROLE_CHOICES, blank=False, null=False
+        max_length=50, choices=Role.choices, blank=False, null=False
     )
     profile_image = models.ImageField(
         upload_to="user-media",
