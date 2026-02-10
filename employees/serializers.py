@@ -1,12 +1,9 @@
-from django.contrib.auth import get_user_model
 from django.utils.crypto import get_random_string
 from rest_framework import serializers
 
 from employees.models import Employee
 from users.models import CustomUser
 from users.serializers import CustomUserSerializer
-
-User = get_user_model()
 
 
 class EmployeeSerializer(serializers.ModelSerializer[Employee]):
@@ -26,7 +23,7 @@ class EmployeeSerializer(serializers.ModelSerializer[Employee]):
         if user_data["role"] != CustomUser.Role.EMPLOYEE:
             raise serializers.ValidationError({"role": "Role must be employee."})
 
-        user = User.objects.create(**user_data)
+                user = CustomUser.objects.create_user(**user_data)
 
         employee = Employee.objects.create(user=user, **validated_data)
         return employee
