@@ -49,17 +49,8 @@ class EmployeeSerializer(serializers.ModelSerializer[Employee]):
             user.profile_image = user_data.get("profile_image", user.profile_image)
             user.save()
 
-        instance.type = validated_data.get("type", instance.type)
-        instance.philhealth_number = validated_data.get(
-            "pag_ibig_number", instance.pag_ibig_number
-        )
-        instance.sss_number = validated_data.get("sss_number", instance.sss_number)
-        instance.drivers_license_number = validated_data.get(
-            "drivers_license_number", instance.drivers_license_number
-        )
-        instance.mobile_number = validated_data.get(
-            "mobile_number", instance.mobile_number
-        )
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
         instance.save()
 
         return instance
