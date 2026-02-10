@@ -23,15 +23,15 @@ class CustomUserSerializer(serializers.ModelSerializer[CustomUser]):
         if not email:
             raise serializers.ValidationError({"email": "This field is required."})
 
-        roles = validated_data.pop("roles", None)
-        if roles is None:
-            raise serializers.ValidationError({"roles": "This field is required."})
+        role = validated_data.pop("role", None)
 
         user = CustomUser.objects.create_user(
             email=email, password=validated_data.pop("password", None), **validated_data
         )
 
-        user.roles.set(roles)
+        if role:
+            user.role.set(role)
+
         user.save()
         return user
 
