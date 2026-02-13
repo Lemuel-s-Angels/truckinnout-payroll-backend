@@ -30,7 +30,7 @@ A backend API for the Truck In-N-Out application, built with Django and Django R
 ### Clone the Repo
 
 ```bash
-git clone https://github.com/<your-org>/truck-in-n-out-backend.git
+git clone https://github.com/Lemuel-s-Angels/truckinnout-payroll-backend.git
 cd truck-in-n-out-backend
 ```
 
